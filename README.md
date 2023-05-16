@@ -1,16 +1,12 @@
 ## Prerequisites
 
-You need singularity container >=2.3. You can follow the instructions of the singulairy manal to compile it ([from source](https://sylabs.io/guides/3.0/user-guide/installation.html)), or use a ([package](https://sylabs.io/guides/3.0/user-guide/installation.html#distribution-packages-of-singularity)). For Ubuntu 20.04 this means:
-
+You need Apptainer container. You can follow the instructions of the Apptainer manual to compile it ([from source](https://github.com/apptainer/apptainer/blob/main/INSTALL.md)), or use a ([package](https://apptainer.org/docs/admin/main/installation.html#install-debian-packages)). For Ubuntu 20.04 this means:
    ```
-   $ sudo wget -O- http://neuro.debian.net/lists/focal.us-ca.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list && \
-     sudo apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9 && \
-     sudo apt-get update
-
-   $ sudo apt install singularity-container
+   $ sudo add-apt-repository -y ppa:apptainer/ppa
+$ sudo apt update
+$ sudo apt install -y apptainer
    ```
 
-Note that for other distributions you should follow the steps found on the 'NeuroDebian' site (under [Distribution Packages of Singularity](https://sylabs.io/guides/3.0/user-guide/installation.html#distribution-packages-of-singularity) on the singularity site)
 
 ## Installing the image builder
 
