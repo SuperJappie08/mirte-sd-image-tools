@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # this depends on the host system used
-# sudo apt install singularity-container
+# sudo apt install apptainer
 
 sudo rm -rf image_tools.sif
-sudo singularity build image_tools.sif image_tools.def
+sudo apptainer build image_tools.sif image_tools.def

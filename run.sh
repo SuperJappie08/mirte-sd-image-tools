@@ -13,12 +13,12 @@ if test "$1" == "image_shell"
 then
    # Shell into the SD card image. This means mounting the the image
    # and chroot 'into' the image.
-   sudo singularity run --app load_image --bind ./mirte_${2}_sd.img:/mirte_sd.img image_tools.sif
+   sudo apptainer run --app load_image --bind ./mirte_${2}_sd.img:/mirte_sd.img image_tools.sif
 fi
-if test "$1" == "singularity_shell"
+if test "$1" == "apptainer_shell"
 then
    #TODO: also bind the repos.yaml and git_local?
-   sudo singularity shell --bind ./mirte_${2}_sd.img:/mirte_sd.img image_tools.sif
+   sudo apptainer shell --bind ./mirte_${2}_sd.img:/mirte_sd.img image_tools.sif
 fi
 if test "$1" == "build_sd_image"
 then
@@ -29,22 +29,22 @@ then
    fi
 
    # Download and resize the image to 8Gb
-   singularity run --app download_image image_tools.sif $image
-   sudo singularity run --app prepare_image --bind ./mirte_${image}_sd.img:/mirte_sd.img image_tools.sif
+   apptainer run --app download_image image_tools.sif $image
+   sudo apptainer run --app prepare_image --bind ./mirte_${image}_sd.img:/mirte_sd.img image_tools.sif
 
    # Install mirte on the image
    if [ -f ./repos.yaml ] && [ -d ./git_local ]; then
-     sudo singularity run --app install_mirte --bind ./mirte_${image}_sd.img:/mirte_sd.img --bind ./repos.yaml:/repos.yaml --bind ./git_local:/git_local image_tools.sif
+     sudo apptainer run --app install_mirte --bind ./mirte_${image}_sd.img:/mirte_sd.img --bind ./repos.yaml:/repos.yaml --bind ./git_local:/git_local image_tools.sif
    elif [ -f ./repos.yaml ]; then
-     sudo singularity run --app install_mirte --bind ./mirte_${image}_sd.img:/mirte_sd.img --bind ./repos.yaml:/repos.yaml image_tools.sif
+     sudo apptainer run --app install_mirte --bind ./mirte_${image}_sd.img:/mirte_sd.img --bind ./repos.yaml:/repos.yaml image_tools.sif
    elif [ -d ./git_local ]; then
-     sudo singularity run --app install_mirte --bind ./mirte_${image}_sd.img:/mirte_sd.img --bind ./git_local:/git_local image_tools.sif
+     sudo apptainer run --app install_mirte --bind ./mirte_${image}_sd.img:/mirte_sd.img --bind ./git_local:/git_local image_tools.sif
    else
-     sudo singularity run --app install_mirte --bind ./mirte_${image}_sd.img:/mirte_sd.img image_tools.sif
+     sudo apptainer run --app install_mirte --bind ./mirte_${image}_sd.img:/mirte_sd.img image_tools.sif
    fi
 
    # Shrink the image to max used size and zip it for convenience
-   sudo singularity run --app shrink_image --bind ./mirte_${image}_sd.img:/mirte_sd.img image_tools.sif
+   sudo apptainer run --app shrink_image --bind ./mirte_${image}_sd.img:/mirte_sd.img image_tools.sif
    mv ./mirte_${image}_sd.img ./mirte_v`date +"%Y%m%d"`_${image}_sd.img
    xz -vT6 ./mirte_v`date +"%Y%m%d"`_${image}_sd.img
 fi
