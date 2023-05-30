@@ -25,11 +25,11 @@ if [ "$image" = "custom" ]; then
 else
    # Download and unxz the file
    # TODO:aks for permission to overwrite
-   if [ -f mirte_${image}_sd.img ]; then
+   if [ -f images/mirte_${image}_sd.img ]; then
     echo "Image already exists"
     exit 0
    fi
-   wget -O mirte_${image}_sd.img.xz $image_link
-   rm -f mirte_${image}_sd.img
-   unxz mirte_${image}_sd.img.xz
+   wget -O images/mirte_${image}_sd.img.xz $image_link
+   rm -f images/mirte_${image}_sd.img
+   unxz images/mirte_${image}_sd.img.xz
 fi
