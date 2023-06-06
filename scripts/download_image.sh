@@ -27,6 +27,7 @@ else
    # TODO:aks for permission to overwrite
    if [ -f mirte_${image}_sd.img ]; then
     echo "Image already exists"
+    echo $image
     exit 0
    fi
    wget -O mirte_${image}_sd.img.xz $image_link

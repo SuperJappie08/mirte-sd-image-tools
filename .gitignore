@@ -4,3 +4,4 @@
 git_local/
 repos.yaml
 images/
+*.xz
