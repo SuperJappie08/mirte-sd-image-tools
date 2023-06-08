@@ -1,5 +1,7 @@
 #!/bin/bash
 
+exec > >(tee -a "logs.log") 2>&1
+
 # Ask for sudo password once, and make sure the timeout will
 # not expire.
 #sudo -v
@@ -56,9 +58,12 @@ if test "$1" == "build_sd_image"; then
     sudo apptainer run --app install_mirte --bind ./mirte_${image}_sd_wip.img:/mirte_sd.img image_tools.sif
   fi
 
+# duplicate for next incremental build
+cp ./mirte_${image}_sd_wip.img ./mirte_vlatest_${image}_sd.img 
+
   # Shrink the image to max used size and zip it for convenience
   sudo apptainer run --app shrink_image --bind ./mirte_${image}_sd_wip.img:/mirte_sd.img image_tools.sif
-  cp ./mirte_${image}_sd_wip.img ./mirte_vlatest_${image}_sd.img
+  
   mv ./mirte_${image}_sd_wip.img ./mirte_v$(date +"%Y%m%d")_${image}_sd.img
   xz -vT6 ./mirte_v$(date +"%Y%m%d")_${image}_sd.img
 fi

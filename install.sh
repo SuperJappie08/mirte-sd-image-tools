@@ -5,3 +5,5 @@
 
 sudo rm -rf image_tools.sif
 sudo apptainer build image_tools.sif image_tools.def
+
+sudo cp image_tools.sif image_tools.backup.sif

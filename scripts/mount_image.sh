@@ -1,5 +1,7 @@
 #!/bin/bash
-
+set -x
+# unmount if there is something mounted from last time
+/umount_image.sh
 # Mount image and resize filesystem
 loopvar=`losetup -fP --show /mirte_sd.img`
 mount -t ext4 `ls $loopvar* | tail -n1` /mnt/image/

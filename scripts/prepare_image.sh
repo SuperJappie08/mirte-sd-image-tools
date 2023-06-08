@@ -7,7 +7,7 @@
 
 # Resize image and partition to a total of 9Gb
 dd if=/dev/zero bs=1G seek=9 count=0 of=/mirte_sd.img
-
+set -x
 # Resize last partition
 loopvar=`losetup --partscan --show --find /mirte_sd.img`
 parted $loopvar resizepart `ls ${loopvar}p* | wc -l` 100%
