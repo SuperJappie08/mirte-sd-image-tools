@@ -64,6 +64,7 @@ cp ./mirte_${image}_sd_wip.img ./mirte_vlatest_${image}_sd.img
   # Shrink the image to max used size and zip it for convenience
   sudo apptainer run --app shrink_image --bind ./mirte_${image}_sd_wip.img:/mirte_sd.img image_tools.sif
   
-  mv ./mirte_${image}_sd_wip.img ./mirte_v$(date +"%Y%m%d")_${image}_sd.img
-  xz -vT6 ./mirte_v$(date +"%Y%m%d")_${image}_sd.img
+  filename=mirte_v$(date +"%Y%m%d%T")_${image}_sd.img
+  mv ./mirte_${image}_sd_wip.img ./"${filename}"
+  xz -vT6 ./"${filename}"
 fi
