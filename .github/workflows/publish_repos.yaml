@@ -1,40 +1,32 @@
+---
 name: Publish other repos
-
 on:
-    release:
-        types: [published]
+  release:
+    types: [published]
 permissions:
-    contents: write
-
+  contents: write
 jobs:
-    upload-repos:
+  upload-repos:
         # container:
         #   image: ubuntu:22.04
         #   options: --privileged
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                repo:
-                    [
-                        "mirte-install-scripts",
-                        "mirte-ros-packages",
-                        "mirte-python",
-                        "telemetrix4rpipico",
-                        "mirte-web-interface",
-                        "mirte-frame",
-                        "tmx-pico-aio",
-                        "telemetrix-aio",
-                        "telemetrix4arduino",
-                        "mirte-pcb",
-                        "mirte-documentation",
-                    ]
-            fail-fast: false
-        steps:
-            - run: |
-                  git clone https://github.com/mirte-robot/${{ matrix.repo }}.git
-                  zip -r ${{ matrix.repo }}.zip ${{ matrix.repo }}
-            - name: Push to release
-              uses: softprops/action-gh-release@v1
-              if: startsWith(github.ref, 'refs/tags/')
-              with:
-                  files: ${{ matrix.repo }}.zip
+    runs-on: ubuntu-latest
+    env:
+      repositories: mirte-install-scripts mirte-ros-packages mirte-python telemetrix4rpipico
+        mirte-web-interface mirte-frame tmx-pico-aio telemetrix-aio telemetrix4arduino
+        mirte-pcb mirte-documentation
+    steps:
+      - run: |
+          mkdir mirte-robot-sources
+          cd mirte-robot-sources 
+          for repo in ${{ env.repositories }}; do
+            echo "Cloning $repo"
+              git clone https://github.com/mirte-robot/$repo.git
+            done
+            cd ..
+          zip -r mirte-robot-sources.zip mirte-robot-sources -x '*/.*'  # don't include hidden files
+      - name: Push to release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: mirte-robot-sources.zip
