@@ -34,7 +34,7 @@ jobs:
                   git clone https://github.com/mirte-robot/${{ matrix.repo }}.git
                   zip -r ${{ matrix.repo }}.zip ${{ matrix.repo }}
             - name: Push to release
-              uses: softprops/action-gh-release@v1
+              uses: softprops/action-gh-release@v2
               if: startsWith(github.ref, 'refs/tags/')
               with:
                   files: ${{ matrix.repo }}.zip
