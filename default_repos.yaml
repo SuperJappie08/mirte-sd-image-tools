@@ -17,12 +17,12 @@ repositories:
     version: master
   mirte-tmx-pico-aio:
     type: git
-    url: https://github.com/mirte-robot/tmx-pico-aio.git
-    version: master
+    url: https://github.com/arendjan/tmx-pico-aio.git
+    version: modules
   mirte-ros-packages:
     type: git
     url: https://github.com/mirte-robot/mirte-ros-packages.git
-    version: main
+    version: develop
   mirte-oled-images:
     type: git
     url: https://github.com/mirte-robot/mirte-oled-images.git
@@ -41,5 +41,5 @@ repositories:
     version: main
   mirte-telemetrix4rpipico:
     type: git
-    url: https://github.com/mirte-robot/Telemetrix4RpiPico.git
-    version: master
+    url: https://github.com/arendjan/Telemetrix4RpiPico.git
+    version: modules2
