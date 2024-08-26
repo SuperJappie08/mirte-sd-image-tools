@@ -46,7 +46,7 @@ if $INSTALL_NETWORK; then /usr/local/src/mirte/mirte-install-scripts/network_ins
 # for script in $${EXTRA_SCRIPTS[@]}; do /usr/local/src/mirte/$script; done
 
 # to use overlayroot: create an sd or usb with an ext4 partition with the label mirte_root. Any changes on the system will be put on the sd/usb instead of the main root file system (emmc)
-sudo echo 'overlayroot=device:dev=LABEL=mirte_root,timeout=2' > /etc/overlayroot.conf # overlayroot
+echo 'overlayroot=device:dev=LABEL=mirte_root,timeout=2' | sudo tee -a /etc/overlayroot.conf # overlayroot
 
 # install provisioning (not yet on main branch)
 # if $INSTALL_PROVISIONING; then
