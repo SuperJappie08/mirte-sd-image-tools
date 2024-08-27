@@ -2,7 +2,7 @@
 
 export INSTALL_DOCS=false
 export INSTALL_ROS=true
-export INSTALL_ARDUINO=false
+export INSTALL_ARDUINO=true
 export INSTALL_WEB=true
 export INSTALL_PYTHON=false
 export INSTALL_JUPYTER=false
