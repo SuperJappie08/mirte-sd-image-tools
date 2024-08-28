@@ -16,4 +16,4 @@ export EXTRA_SCRIPTS=(
 	# "testExtra.sh"
 	# "testExtra2.sh"
 )
-export PARALLEL=true
+export PARALLEL=false
