@@ -22,7 +22,7 @@ cd /usr/local/src/mirte/
 # Download all the mirte repos
 vcs import --workers 1 --input ./repos.yaml --skip-existing || true
 
-pip3 install "deepdiff[cli]"
+pip3 install "deepdiff[cli]==7.0.1"
 deep diff --ignore-order --ignore-string-case ./repos.yaml ./mirte-install-scripts/repos.yaml # to show the difference between the repos.yaml in here and in mirte-install-scripts/repos.yaml
 cp ./repos.yaml ./mirte-install-scripts/repos.yaml                                            # overwrite the repos.yaml in mirte-install-scripts with the one in here
 
