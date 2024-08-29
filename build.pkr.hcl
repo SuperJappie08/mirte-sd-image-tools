@@ -8,10 +8,6 @@ packer {
           version = "~> 1"
           source  = "github.com/hashicorp/virtualbox"
         }
-        qemu = {
-          version = "~> 1"
-          source  = "github.com/hashicorp/qemu"
-        }
   }
 }
 

@@ -6,13 +6,16 @@ on:
   
 jobs:
     build-virtualbox:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-22.04
         steps: 
           - name: Checkout
             uses: actions/checkout@v4
           - run: |
               sudo apt update
-              sudo apt install -y virtualbox
+              sudo apt install -y virtualbox virtualbox-dkms linux-headers-generic linux-headers-$(uname -r)
+              sudo dpkg-reconfigure virtualbox-dkms
+              sudo dpkg-reconfigure virtualbox
+
               ./packerInstall.sh
               mkdir git_local || true
               mkdir workdir || true
