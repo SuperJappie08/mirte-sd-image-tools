@@ -12,6 +12,7 @@ export INSTALL_PROVISIONING=false
 export INSTALL_VSCODE=true
 export INSTALL_PAM=true
 export MIRTE_TYPE="default"
+export MIRTE_SBC="unknown"
 export EXTRA_SCRIPTS=(
 	# "testExtra.sh"
 	# "testExtra2.sh"

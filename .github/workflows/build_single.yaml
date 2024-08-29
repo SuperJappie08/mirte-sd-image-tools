@@ -64,7 +64,11 @@ jobs:
                     ./packerInstall.sh
             - name: setup build files
               run: |
+                  TMP_SBC=${{ inputs.sbc }}
+                  TMP_SBC=${TMP_SBC//mirte_} # replace all
+
                   echo -e "MIRTE_TYPE=${{ inputs.mirte_type }}" >> settings.sh
+                  echo -e "MIRTE_SBC=$TMP_SBC" >> settings.sh
                   # cat settings.sh
                   # - name: setup repos
             #   run: |
