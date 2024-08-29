@@ -18,9 +18,9 @@ jobs:
               sudo dpkg-reconfigure virtualbox
               sudo apt-get autoremove
               sudo /sbin/vboxconfig || true
-              wget https://mirte.arend-jan.com/files/test/Armbian_Focal_Uefi.ova
-              vboxmanage import Armbian_Focal_Uefi.ova
-              vboxmanage startvm Armbian_Focal_Uefi --type headless
+              # wget https://mirte.arend-jan.com/files/test/Armbian_Focal_Uefi.ova
+              # vboxmanage import Armbian_Focal_Uefi.ova
+              # vboxmanage startvm Armbian_Focal_Uefi --type headless
 
 
               ./packerInstall.sh

@@ -55,6 +55,7 @@ source "virtualbox-ovf" "install_tests" {
   ssh_password = "1234"
   output_directory = "./workdir/vm"
   shutdown_command = "echo '1234' | sudo -S shutdown -P now"
+  headless = true
 }
 
 
