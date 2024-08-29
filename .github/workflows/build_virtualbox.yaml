@@ -14,6 +14,10 @@ jobs:
               sudo apt update
               sudo apt install -y virtualbox
               ./packerInstall.sh
+              mkdir git_local || true
+              mkdir workdir || true
+              mkdir logs || true
+              mkdir build || true
               sudo packer build --only virtualbox-ovf.install_tests build.pkr.hcl
               ls -l build/
               ls -l workdir/
