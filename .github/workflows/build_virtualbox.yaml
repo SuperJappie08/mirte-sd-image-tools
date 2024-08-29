@@ -12,9 +12,16 @@ jobs:
             uses: actions/checkout@v4
           - run: |
               sudo apt update
-              sudo apt install -y virtualbox virtualbox-dkms linux-headers-generic linux-headers-$(uname -r)
+              sudo apt install -y virtualbox linux-headers-generic linux-headers-$(uname -r)
+              sudo apt install -y virtualbox-dkms
               sudo dpkg-reconfigure virtualbox-dkms
               sudo dpkg-reconfigure virtualbox
+              sudo apt-get autoremove
+              sudo /sbin/vboxconfig || true
+              wget https://mirte.arend-jan.com/files/test/Armbian_Focal_Uefi.ova
+              vboxmanage import Armbian_Focal_Uefi.ova
+              vboxmanage start Armbian_Focal_Uefi --type headless
+
 
               ./packerInstall.sh
               mkdir git_local || true
