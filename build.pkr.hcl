@@ -4,6 +4,14 @@ packer {
       version = ">= 0.2.11"
       source  = "github.com/arendjan/arm-image"
     }
+        virtualbox = {
+          version = "~> 1"
+          source  = "github.com/hashicorp/virtualbox"
+        }
+        qemu = {
+          version = "~> 1"
+          source  = "github.com/hashicorp/qemu"
+        }
   }
 }
 
@@ -42,9 +50,20 @@ source "arm-image" "mirte_rpi4b" { # TODO: change to armbian image
   target_image_size = 15*1024*1024*1024 # 15GB
 }
 
+source "virtualbox-ovf" "install_tests" {
+  // guest_os_type = "Ubuntu"
+  source_path = "https://mirte.arend-jan.com/files/test/Armbian_Focal_Uefi.ova"
+  // iso_checksum = "none"
+  checksum = "sha256:55e43e62639628be9013d1b60ea90d035dd1f02dd3ac14f0786940375f7ff094"
+  ssh_username = "root"
+  ssh_password = "1234"
+  output_directory = "./workdir/vm"
+  shutdown_command = "echo '1234' | sudo -S shutdown -P now"
+}
+
 
 build {
-  sources = ["source.arm-image.mirte_orangepizero2", "source.arm-image.mirte_orangepizero",  "source.arm-image.mirte_orangepi3b", "source.arm-image.mirte_rpi4b"]
+  sources = ["source.arm-image.mirte_orangepizero2", "source.arm-image.mirte_orangepizero",  "source.arm-image.mirte_orangepi3b", "source.arm-image.mirte_rpi4b", "source.virtualbox-ovf.install_tests"]
   provisioner "file" {
     source = "git_local"
     destination = "/usr/local/src/mirte"

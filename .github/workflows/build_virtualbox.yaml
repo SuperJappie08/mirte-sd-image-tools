@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    paths:
+      - .github/workflows/build_armbian.yaml
+
+  
+jobs:
+    build-armbian:
+        runs-on: ubuntu-latest
+        steps: 
+          - name: Checkout
+            uses: actions/checkout@v4
+          - run: |
+              sudo apt update
+              sudo apt install -y virtualbox
+              ./packerInstall.sh
+              sudo packer build --only virtualbox-ovf.install_tests build.pkr.hcl
+              ls -l build/
+              ls -l workdir/
+
+          - uses: actions/upload-artifact@v4
+            with:
+              name: build_${{ matrix.image }}
+              path: build/output/images/*.img
+
+ 
+    
