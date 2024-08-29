@@ -1,13 +1,11 @@
-name: test
+name: build-virtualbox
 
 on:
   push:
-    paths:
-      - .github/workflows/build_armbian.yaml
 
   
 jobs:
-    build-armbian:
+    build-virtualbox:
         runs-on: ubuntu-latest
         steps: 
           - name: Checkout
