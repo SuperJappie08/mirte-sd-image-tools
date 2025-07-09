@@ -76,7 +76,7 @@ jobs:
        if: >
            needs.check-repo-changes.outputs.repo_changes == 'true'
            || github.event_name != 'schedule'
-       uses: mirte-robot/mirte-sd-image-tools/.github/workflows/buildFork.yaml@develop-jazzy
+       uses: SuperJappie08/mirte-sd-image-tools/.github/workflows/buildFork.yaml@develop-jazzy
        with:
          branch: "develop-jazzy"
 
