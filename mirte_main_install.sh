@@ -20,10 +20,12 @@ chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo # something with sudo 
 . /usr/local/src/mirte/settings.sh                        # load settings
 mkdir /usr/local/src/mirte/build_system/ || true
 apt update
-apt install -y git python3-pip curl
+apt install -y git python3-pip pipx curl
+pipx ensurepath
 
 apt update || true
-pip3 install vcstool
+# pip3 install vcstool
+pipx install vcstool
 apt install -y python3-pip python3-dev libblas-dev liblapack-dev libatlas-base-dev gfortran
 cd /usr/local/src/mirte/
 # Download all the mirte repos
@@ -35,7 +37,8 @@ if [ -d ./mirte-telemetrix-cpp ]; then
 	cd -
 fi
 
-pip3 install "deepdiff[cli]"
+pipx install deepdiff[cli]
+# pip3 install "deepdiff[cli]"
 # deep diff --ignore-order --ignore-string-case ./repos.yaml ./mirte-install-scripts/repos.yaml # to show the difference between the repos.yaml in here and in mirte-install-scripts/repos.yaml
 # overwrite the repos.yaml in mirte-install-scripts with the one in here
 cp ./repos.yaml ./mirte-install-scripts/repos.yaml
@@ -50,6 +53,7 @@ if false; then
 fi
 # install prebuilt wheels when on orangepizero, as numpy takes ages to build
 if [[ $type == "mirte_orangepizero" ]]; then
+	# FIXME: This probably does not work on Python3.12+ (Ubuntu 24+)
 	pip3 install /usr/local/src/mirte/wheels/*
 fi
 
