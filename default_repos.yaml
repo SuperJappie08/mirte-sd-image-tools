@@ -1,8 +1,13 @@
 repositories:
   mirte-web-interface:
     type: git
+<<<<<<< HEAD
     url: https://github.com/mirte-robot/mirte-web-interface.git
     version: v0.1.1-dev
+=======
+    url: https://github.com/mklomp/mirte-web-interface.git
+    version: pre-u-color-fix
+>>>>>>> upstreamMIRTE/main
   mirte-telemetrix4arduino:
     type: git
     url: https://github.com/mirte-robot/Telemetrix4Arduino.git
