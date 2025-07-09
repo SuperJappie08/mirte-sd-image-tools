@@ -49,13 +49,13 @@ jobs:
     master-build-and-push:
         needs: [shellcheck, shfmt, repocheck]
         if:  ${{ ! startsWith(github.event.head_commit.message, 'x') }}
-        # strategy:
-        #     matrix:
-        #         image: [ 
-        #                 # mirte_orangepizero2,
-        #                 mirte_orangepi3b
-        #                 ]
-        #     fail-fast: false
+        strategy:
+            matrix:
+                image: [ 
+                        mirte_orangepi3b,
+                        mirte_orangepi3b_rt,
+                        ]
+            fail-fast: false
         uses: ./.github/workflows/build_single.yaml
         with:
           mirte_type: mirte-master

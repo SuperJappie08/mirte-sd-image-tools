@@ -10,8 +10,8 @@ packer {
 
 source "arm-image" "mirte_orangepizero2" {
   image_type = "armbian"
-  iso_url = "https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.22.img.xz"
-  iso_checksum = "file:https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.22.img.xz.sha"
+  iso_url = "https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.11.img.xz"
+  iso_checksum = "file:https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.11.img.xz.sha"
   output_filename = "./workdir/mirte_orangepizero2.img"
   target_image_size = 15*1024*1024*1024
   image_arch = "arm64"
@@ -19,8 +19,8 @@ source "arm-image" "mirte_orangepizero2" {
 
 source "arm-image" "mirte_orangepizero2_rt" {
   image_type = "armbian"
-  iso_url = "https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.22_rt.img.xz"
-  iso_checksum = "file:https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.22_rt.img.xz.sha"
+  iso_url = "https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.11_rt.img.xz"
+  iso_checksum = "file:https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.11_rt.img.xz.sha"
   output_filename = "./workdir/mirte_orangepizero2_rt.img"
   target_image_size = 15*1024*1024*1024
   image_arch = "arm64"
