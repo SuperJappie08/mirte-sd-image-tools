@@ -21,7 +21,7 @@ chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo # something with sudo 
 mkdir /usr/local/src/mirte/build_system/ || true
 apt update
 apt install -y git python3-pip pipx curl
-sudo pipx ensurepath --global
+sudo pipx ensurepath
 
 apt update || true
 # pip3 install vcstool
