@@ -17,10 +17,16 @@ permissions:
 jobs:
     shellcheck:
       uses: ./.github/workflows/shellcheck.yml
+      with:
+        branch: ${{ inputs.branch }}
     shfmt:
       uses: ./.github/workflows/shfmt.yml
+      with:
+        branch: ${{ inputs.branch }}
     repocheck:
       uses: ./.github/workflows/repocheck.yml
+      with:
+        branch: ${{ inputs.branch }}
     build-and-push:
         needs: [shellcheck, shfmt, repocheck]
         strategy:

@@ -1,13 +1,20 @@
 name: shfmt
 on:
-  - pull_request
+  workflow_call:
+    inputs:
+      branch:
+        required: false
+        type: string
+        default: main
+  pull_request:
   # - push
-  - workflow_call
 jobs:
   sh-checker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
       - name: Run the sh-checker
         uses: luizm/action-sh-checker@master
         env:

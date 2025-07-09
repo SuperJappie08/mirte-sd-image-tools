@@ -1,7 +1,12 @@
 on:
   # - push
-  - pull_request
-  - workflow_call
+  workflow_call:
+    inputs:
+      branch:
+        required: false
+        type: string
+        default: main
+  pull_request:
 
 name: "reposcheck"
 permissions: {}
@@ -12,14 +17,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
       - name: Install vcstool via pipx
         uses: threeal/pipx-install-action@v1
         with:
           packages: vcstool
       - name: Create check folder
         run: mkdir check
-      - name: Check (Develop)
-        run: |
-          ls -R
-          vcs import --shallow --input develop_repos.yaml check
+      - name: Check (main)
+        if: ${{ ! startsWith(inputs.branch, 'develop') }}
+        run: vcs import --shallow --input default_repos.yaml check
+      - name: Check (develop)
+        if: ${{ startsWith(inputs.branch, 'develop') }}
+        run: vcs import --shallow --input develop_repos.yaml check
 

@@ -1,7 +1,12 @@
 on:
   # - push
-  - pull_request
-  - workflow_call
+  workflow_call:
+    inputs:
+      branch:
+        required: false
+        type: string
+        default: main
+  pull_request:
 
 name: "Shellcheck"
 permissions: {}
@@ -12,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
         with:
