@@ -19,5 +19,7 @@ jobs:
       - name: Create check folder
         run: mkdir check
       - name: Check (Develop)
-        run: vcs import --shallow --input develop_repos.yaml check
+        run: |
+          ls -R
+          vcs import --shallow --input develop_repos.yaml check
 
