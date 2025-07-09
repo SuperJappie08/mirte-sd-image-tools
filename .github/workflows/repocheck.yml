@@ -12,16 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install vcstool
-        run: |
-          sudo apt update
-          sudo apt-get install python3-pip
-          sudo pip install vcstool
-          mkdir check
-      - name: check (Main)
+      - name: Install vcstool via pipx
+        uses: threeal/pipx-install-action@v1
+        with:
+          packages: vcstool
+      - name: Create check folder
+        run: mkdir check
+      - name: Check (Main)
         if: ${{ ! startsWith(github.ref_name, 'develop') }}
         run: vcs import --shallow --input default_repos.yaml check
-      - name: check (Develop)
+      - name: Check (Develop)
         if: ${{ startsWith(github.ref_name, 'develop') }}
         run: vcs import --shallow --input develop_repos.yaml check
 
