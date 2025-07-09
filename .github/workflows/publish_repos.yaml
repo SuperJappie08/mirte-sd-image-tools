@@ -11,7 +11,7 @@ jobs:
         # container:
         #   image: ubuntu:22.04
         #   options: --privileged
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         strategy:
             matrix:
                 repo:

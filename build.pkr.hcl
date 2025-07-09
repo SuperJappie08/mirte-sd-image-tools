@@ -10,27 +10,46 @@ packer {
 
 source "arm-image" "mirte_orangepizero2" {
   image_type = "armbian"
-  iso_url = "https://github.com/ArendJan/mirte_base_images/releases/download/25.2.3/Armbian-unofficial_25.2.3_Orangepizero2_jammy_current_6.6.62.img.xz"
-  iso_checksum = "file:https://github.com/ArendJan/mirte_base_images/releases/download/25.2.3/Armbian-unofficial_25.2.3_Orangepizero2_jammy_current_6.6.62.img.xz.sha"
+  iso_url = "https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.22.img.xz"
+  iso_checksum = "file:https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.22.img.xz.sha"
   output_filename = "./workdir/mirte_orangepizero2.img"
   target_image_size = 15*1024*1024*1024
   image_arch = "arm64"
 }
 
-source "arm-image" "mirte_orangepizero2_noble" {
+source "arm-image" "mirte_orangepizero2_rt" {
   image_type = "armbian"
-  iso_url = "https://imola.armbian.com/archive/orangepizero2/archive/Armbian_24.5.1_Orangepizero2_noble_current_6.6.31.img.xz"
-  iso_checksum = "none"
-  output_filename = "./workdir/mirte_orangepizero2.img"
+  iso_url = "https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.22_rt.img.xz"
+  iso_checksum = "file:https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepizero2_noble_edge_6.13.22_rt.img.xz.sha"
+  output_filename = "./workdir/mirte_orangepizero2_rt.img"
   target_image_size = 15*1024*1024*1024
   image_arch = "arm64"
 }
+
+# source "arm-image" "mirte_orangepizero2_noble" {
+#   image_type = "armbian"
+#   iso_url = "https://imola.armbian.com/archive/orangepizero2/archive/Armbian_24.5.1_Orangepizero2_noble_current_6.6.31.img.xz"
+#   iso_checksum = "none"
+#   output_filename = "./workdir/mirte_orangepizero2.img"
+#   target_image_size = 15*1024*1024*1024
+#   image_arch = "arm64"
+# }
 
 source "arm-image" "mirte_orangepi3b" {
   image_type = "armbian"
-  iso_url = "https://github.com/ArendJan/mirte_base_images/releases/download/25.2.3/Armbian-unofficial_25.2.3_Orangepi3b_jammy_edge_6.13.3.img.xz"
-  iso_checksum = "file:https://github.com/ArendJan/mirte_base_images/releases/download/25.2.3/Armbian-unofficial_25.2.3_Orangepi3b_jammy_edge_6.13.3.img.xz.sha"
+  iso_url = "https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepi3b_noble_edge_6.14.6.img.xz"
+  iso_checksum = "file:https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepi3b_noble_edge_6.14.6.img.xz.sha"
   output_filename = "./workdir/mirte_orangepi3b.img"
+  target_image_size = 15*1024*1024*1024
+  # qemu_binary = ""
+  image_arch = "arm64"
+}
+
+source "arm-image" "mirte_orangepi3b_rt" {
+  image_type = "armbian"
+  iso_url = "https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepi3b_noble_edge_6.14.6_rt.img.xz"
+  iso_checksum = "file:https://github.com/SuperJappie08/mirte_base_images/releases/download/rt_thesis/Armbian-unofficial_25.5.1_Orangepi3b_noble_edge_6.14.6_rt.img.xz.sha"
+  output_filename = "./workdir/mirte_orangepi3b_rt.img"
   target_image_size = 15*1024*1024*1024
   # qemu_binary = ""
   image_arch = "arm64"
@@ -55,7 +74,15 @@ source "arm-image" "mirte_rpi4b" {
 }
 
 build {
-  sources = ["source.arm-image.mirte_orangepizero2", "source.arm-image.mirte_orangepizero2_noble", "source.arm-image.mirte_orangepi3b", "source.arm-image.mirte_x86", "source.arm-image.mirte_rpi4b"]
+  sources = [
+    "source.arm-image.mirte_orangepizero2",
+    "source.arm-image.mirte_orangepizero2_rt",
+    # "source.arm-image.mirte_orangepizero2_noble",
+    "source.arm-image.mirte_orangepi3b",
+    "source.arm-image.mirte_orangepi3b_rt",
+    "source.arm-image.mirte_x86",
+    "source.arm-image.mirte_rpi4b"
+  ]
   provisioner "file" {
     source = "git_local"
     destination = "/usr/local/src/mirte"

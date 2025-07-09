@@ -34,8 +34,10 @@ on:
             default: orangepizero2
             options:
               - orangepizero2
+              - orangepizero2_rt
               - orangepi3b
-              - rpi4b
+              - orangepi3b_rt
+              # - rpi4b
 
 permissions:
     contents: write
@@ -45,7 +47,7 @@ jobs:
         # container:
         #   image: ubuntu:22.04
         #   options: --privileged
-        runs-on: ubuntu-22.04-arm
+        runs-on: ubuntu-24.04-arm
         
         steps:
             - name: Maximize build space
@@ -66,6 +68,7 @@ jobs:
                 ref: ${{ inputs.branch }}
             - name: Extract branch name
               shell: bash
+              # TODO:(SuperJappie08): Maybe add ROS version to output name
               run: |
                 echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
                 echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
@@ -88,7 +91,7 @@ jobs:
                 PACKER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: setup build files
               run: |
-                  if [[ "${{ inputs.branch }}" == "develop" ]]; then
+                  if [[ ${{ startsWith(inputs.branch, 'develop') }} ]]; then
                     cp develop_repos.yaml repos.yaml
                     echo "Using develop_repos.yaml"
                   fi
@@ -96,6 +99,9 @@ jobs:
                   #   if [[ "${{ inputs.mirte_type }}" != "default" || "${{ inputs.sbc }}" != "orangepizero2" ]]; then
                   #     echo -e "ADD_OVERLAY_PARTITION=false" >> settings.sh
                   # fi
+                  if [[ "${{ endsWith(inputs.sbc, '_rt') }}" ]]; then
+                    echo -e "export INSTALL_RT=true" >> settings.sh
+                  fi
                   cat settings.sh
                   # - name: setup repos
             #   run: |
@@ -134,7 +140,7 @@ jobs:
 
     build_installer_all:
       # TODO: Add a flag for building installers, based on some configuration
-      if: ${{ endsWith(inputs.sbc, 'orangepi3b') }}
+      if: ${{ startsWith(inputs.sbc, 'orangepi3b') }}
       needs: [build-and-push]
       uses: ./.github/workflows/build_installer.yaml
       with:
