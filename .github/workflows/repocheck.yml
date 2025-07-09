@@ -18,10 +18,6 @@ jobs:
           packages: vcstool
       - name: Create check folder
         run: mkdir check
-      - name: Check (Main)
-        if: ${{ ! startsWith(github.ref_name, 'develop') }}
-        run: vcs import --shallow --input default_repos.yaml check
       - name: Check (Develop)
-        if: ${{ startsWith(github.ref_name, 'develop') }}
         run: vcs import --shallow --input develop_repos.yaml check
 
