@@ -21,15 +21,16 @@ chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo # something with sudo 
 mkdir /usr/local/src/mirte/build_system/ || true
 apt update
 apt install -y git python3-pip pipx curl
-sudo pipx ensurepath
+# sudo pipx ensurepath
 
 apt update || true
 # pip3 install vcstool
-pipx install vcstool
+# pipx install vcstool
 apt install -y python3-pip python3-dev libblas-dev liblapack-dev libatlas-base-dev gfortran
 cd /usr/local/src/mirte/
 # Download all the mirte repos
-vcs import --workers 1 --input ./repos.yaml --skip-existing || true
+# Run this in a temporary pipx environment, so vcstool can be later be installed via the ROS repos
+pipx run --spec vcstool -- vcs import --workers 1 --input ./repos.yaml --skip-existing || true
 # Initialize the submodule of mirte-telemetrix-cpp
 if [ -d ./mirte-telemetrix-cpp ]; then
 	cd mirte-telemetrix-cpp
@@ -37,7 +38,7 @@ if [ -d ./mirte-telemetrix-cpp ]; then
 	cd -
 fi
 
-pipx install deepdiff[cli]
+# pipx install deepdiff[cli]
 # pip3 install "deepdiff[cli]"
 # deep diff --ignore-order --ignore-string-case ./repos.yaml ./mirte-install-scripts/repos.yaml # to show the difference between the repos.yaml in here and in mirte-install-scripts/repos.yaml
 # overwrite the repos.yaml in mirte-install-scripts with the one in here
