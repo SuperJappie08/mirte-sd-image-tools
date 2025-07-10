@@ -59,7 +59,7 @@ jobs:
         uses: ./.github/workflows/build_single.yaml
         with:
           mirte_type: mirte-master
-          sbc: mirte_orangepi3b
+          sbc: ${{ matrix.image }}
           branch: ${{ inputs.branch }}
         secrets: inherit
     overlay-build-and-push:
