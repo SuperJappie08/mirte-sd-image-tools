@@ -103,4 +103,4 @@ jobs:
               if: ${{ inputs.mirte_type == 'default' }}
               with:
                 path: build/*installer*.img.xz
-                name: mirte_installer_${{ inputs.sbc }}"
+                name: "mirte_installer_${{ inputs.sbc }}"
