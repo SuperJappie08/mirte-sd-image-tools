@@ -89,21 +89,22 @@ jobs:
                     ./packerInstall.sh
               env:
                 PACKER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - name: setup build files
+            - name: Setup build files (development repos)
+              if: startsWith(inputs.branch, 'develop')
               run: |
-                  if [[ ${{ startsWith(inputs.branch, 'develop') }} ]]; then
-                    cp develop_repos.yaml repos.yaml
-                    echo "Using develop_repos.yaml"
-                  fi
+                cp develop_repos.yaml repos.yaml
+                echo "Using develop_repos.yaml"
+            - name: Setup build files (RT)
+              if: endsWith(inputs.sbc, '_rt')
+              run: echo -e "export INSTALL_RT=true" >> settings.sh
+            - name: Setup build files (Finalize)
+              run: |
                   echo -e "MIRTE_TYPE=${{ inputs.mirte_type }}" >> settings.sh
                   #   if [[ "${{ inputs.mirte_type }}" != "default" || "${{ inputs.sbc }}" != "orangepizero2" ]]; then
                   #     echo -e "ADD_OVERLAY_PARTITION=false" >> settings.sh
                   # fi
-                  if [[ ${{ endsWith(inputs.sbc, '_rt') }} ]]; then
-                    echo -e "export INSTALL_RT=true" >> settings.sh
-                  fi
                   cat settings.sh
-                  # - name: setup repos
+            # - name: setup repos
             #   run: |
             #     cp main_repos.yaml repos.yaml
             #     yq e -i '.repositories.mirte-ros-packages.version = "fix-intro-rob"' repos.yaml
