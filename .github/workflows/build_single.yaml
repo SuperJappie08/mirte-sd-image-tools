@@ -99,7 +99,7 @@ jobs:
                   #   if [[ "${{ inputs.mirte_type }}" != "default" || "${{ inputs.sbc }}" != "orangepizero2" ]]; then
                   #     echo -e "ADD_OVERLAY_PARTITION=false" >> settings.sh
                   # fi
-                  if [[ "${{ endsWith(inputs.sbc, '_rt') }}" ]]; then
+                  if [[ ${{ endsWith(inputs.sbc, '_rt') }} ]]; then
                     echo -e "export INSTALL_RT=true" >> settings.sh
                   fi
                   cat settings.sh
